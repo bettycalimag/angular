@@ -1,0 +1,157 @@
+<div class="container">  
+  
+    <mat-card>  
+      <mat-toolbar color="accent">  
+        <div align="center" style="color:white;text-align: right;">  
+          Tenants of each Apartments 
+        </div>    
+      </mat-toolbar>  
+    <br><br>  
+      <mat-card-content>  
+        <form *ngIf="tenantForm" [formGroup]="tenantForm" (ngSubmit)="onFormSubmit()">  
+                <table>  
+                  <tr>  
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input formControlName="firstName" matTooltip="Enter Firstname" matInput placeholder="First Name" autocomplete="firstName">  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!tenantForm.get('firstName').value && tenantForm.get('firstName').touched"></span>  
+                      </mat-error>  
+                    </td>  
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input formControlName="lastName" matTooltip="Enter Lastname" matInput placeholder="Last Name" autocomplete="lastName">  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!tenantForm.get('lastName').value && tenantForm.get('lastName').touched"></span>  
+                      </mat-error>  
+                    </td> 
+                    <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input formControlName="downPayment" matTooltip="Enter DownPayment" matInput placeholder="DownPayment" autocomplete="downPayment">  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!tenantForm.get('downPayment').value && tenantForm.get('downPayment').touched"></span>  
+                        </mat-error>  
+                      </td> 
+                      <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input formControlName="deposit" matTooltip="Enter Deposit" matInput placeholder="Deposit" autocomplete="deposit">  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!tenantForm.get('deposit').value && tenantForm.get('deposit').touched"></span>  
+                        </mat-error>  
+                      </td>                                                     
+                  </tr>
+                  <tr>  
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <mat-label>Is the DownPayment Used</mat-label>
+                            <select matNativeControl required formControlName="usedDownPayment">
+                                <option value="0">False</option>
+                                <option value="1">True</option>                               
+                            </select>  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!tenantForm.get('usedDownPayment').value && tenantForm.get('usedDownPayment').touched"></span>  
+                      </mat-error>  
+                    </td> 
+                    <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <mat-label>Is the Deposit Used</mat-label>
+                              <select matNativeControl required formControlName="usedDeposit">
+                                  <option value="0">False</option>
+                                  <option value="1">True</option>                               
+                              </select>  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!tenantForm.get('usedDeposit').value && tenantForm.get('usedDeposit').touched"></span>  
+                        </mat-error>  
+                      </td>                   
+                      <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <mat-label>Is the Tenant still active</mat-label>
+                              <select matNativeControl required formControlName="active">
+                                  <option value="0">False</option>
+                                  <option value="1">True</option>                               
+                              </select>  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!tenantForm.get('active').value && tenantForm.get('active').touched"></span>  
+                        </mat-error>  
+                      </td>  
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input matInput [matDatepicker]="pickerTo"matTooltip="Choose entry date in Apartment" formControlName="dateInsert"placeholder="Choose entry date in Apartment" autocomplete="dateInsert">  
+                        <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>  
+                        <mat-datepicker #pickerTo></mat-datepicker>  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!tenantForm.get('dateInsert').value && tenantForm.get('dateInsert').touched"></span>  
+                      </mat-error>  
+                    </td>                       
+                  </tr>
+                  <tr>
+                    <mat-form-field class="demo-full-width"> 
+                            <mat-label>Rented Apartment</mat-label>
+                            <mat-select matNativeControl required formControlName="rentedPlacesId" [(ngModel)]="selected2">
+                              <mat-option *ngFor="let rentedPlace of rentedPlaces" [value]="rentedPlace.id">
+                                {{rentedPlace.rentedName}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!tenantForm.get('rentedPlacesId').value && tenantForm.get('rentedPlacesId').touched"></span>  
+                        </mat-error>  
+                  </tr>                      
+                  <tr>  
+                    <td></td>  
+                    <td  class="content-center">  
+                      <button type="submit" mat-raised-button color="accent"matTooltip="Click Submit Button"[disabled]="!tenantForm.valid">Submit</button>      
+                      <button type="reset" mat-raised-button color="accent"matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>  
+                    </td>  
+                    <td>  
+                      <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">  
+                        {{massage}}  
+                      </p>  
+                    </td>  
+                  </tr>  
+                </table>  
+    <br><br>  
+          <table class="table" >  
+              <tr ngclass="btn-primary">  
+                <th class="tbl2">FirstName</th>  
+                <th class="tbl2">Lastname</th>  
+                <th class="tbl2">DownPayment</th>  
+                <th class="tbl2">Deposit</th>  
+                <th class="tbl2">Used DownPayment</th> 
+                <th class="tbl2">Used Deposit</th>  
+                <th class="tbl2">Active</th> 
+                <th class="tbl2">Entry Date</th>  
+                <th class="tbl2">Rented Apartment</th>             
+                <th class="tbl2">Edit</th>  
+                <th class="tbl2">Delete</th>  
+              </tr>  
+              <tr *ngFor="let tenant of tenants">  
+                <td class="tbl2">{{tenant.firstName}}</td>  
+                <td class="tbl2">{{tenant.lastName}}</td> 
+                <td class="tbl2">{{tenant.downPayment}}</td> 
+                <td class="tbl2">{{tenant.deposit}}</td> 
+                <td class="tbl2">{{sourceBoolean[tenant.usedDownPayment]}}</td> 
+                <td class="tbl2">{{sourceBoolean[tenant.usedDeposit]}}</td> 
+                <td class="tbl2">{{sourceBoolean[tenant.active]}}</td>    
+                <td class="tbl2">{{tenant.dateInsert | date: 'yyyy/MM/dd'}}</td>   
+                <td class="tbl2">{{tenant.rentedName}}</td>    
+                <td class="tbl2">  
+                  <button type="button" class="btn btn-info"matTooltip="Click Edit Button"(click)="loadTenantToEdit(tenant.id)">Edit</button>  
+                </td>  
+                <td class="tbl2">  
+                  <button type="button" class="btn btn-danger"matTooltip="Click Delete Button"(click)="deleteTenant(tenant.id)">Delete</button>  
+                </td>  
+              </tr>        
+            </table>           
+        </form>  
+      </mat-card-content>  
+    </mat-card>  
+    </div>

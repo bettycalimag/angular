@@ -11,6 +11,9 @@ namespace Contracts.Datapersist
         }
 
         public DbSet<Contract> Contracts { get; set; }
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<RentedPlace> RentedPlaces { get; set; }
+        public DbSet<Tenant> Tenants { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

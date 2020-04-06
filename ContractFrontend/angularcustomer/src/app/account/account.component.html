@@ -1,0 +1,130 @@
+<div class="container">  
+  
+    <mat-card>  
+      <mat-toolbar color="accent">  
+        <div align="center" style="color:white;text-align: right;">  
+          Account 
+        </div>    
+      </mat-toolbar>  
+    <br><br>  
+      <mat-card-content>  
+        <form *ngIf="accountForm" [formGroup]="accountForm" (ngSubmit)="onFormSubmit()">  
+                <table>  
+                  <tr>  
+                    <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input matInput [matDatepicker]="pickerTo"matTooltip="Choose payment date in Apartment" formControlName="paymentDate" placeholder="Choose payment date in Apartment" autocomplete="paymentDate">  
+                          <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>  
+                          <mat-datepicker #pickerTo></mat-datepicker>  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!accountForm.get('paymentDate').value && accountForm.get('paymentDate').touched"></span>  
+                        </mat-error>  
+                      </td>   
+                    <td class="tbl1">  
+                        <mat-form-field class="demo-full-width"> 
+                            <mat-label>Tenant Name</mat-label>
+                            <mat-select matNativeControl required formControlName="tenantId" [(ngModel)]="selected2">
+                              <mat-option *ngFor="let tenant of tenants" [value]="tenant.id">
+                                {{tenant.firstName}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!accountForm.get('tenantId').value && accountForm.get('tenantId').touched"></span>  
+                        </mat-error>  
+                    </td> 
+                    <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input formControlName="rentAmountPaid" matTooltip="Enter Rent Amount Paid" matInput placeholder="Rent Amount Paid" autocomplete="rentAmountPaid">  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!accountForm.get('rentAmountPaid').value && accountForm.get('rentAmountPaid').touched"></span>  
+                        </mat-error>  
+                      </td> 
+                      <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input formControlName="electricBillPaid" matTooltip="Enter Electric Bill Paid" matInput placeholder="electricBillPaid" autocomplete="electricBillPaid">  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!accountForm.get('electricBillPaid').value && accountForm.get('electricBillPaid').touched"></span>  
+                        </mat-error>  
+                      </td>                                                     
+                  </tr>
+                  <tr>  
+                    <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input formControlName="waterBillPaid" matTooltip="Enter Water Bill Paid" matInput placeholder="Water Bill Paid" autocomplete="waterBillPaid">  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!accountForm.get('waterBillPaid').value && accountForm.get('waterBillPaid').touched"></span>  
+                        </mat-error>  
+                      </td>   
+                      <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                          <input formControlName="remarks" matTooltip="Enter Remarks" matInput placeholder="Remarks" autocomplete="remarks">  
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!accountForm.get('remarks').value && accountForm.get('remarks').touched"></span>  
+                        </mat-error>  
+                      </td>                    
+                      <td class="tbl1">  
+                        <mat-form-field class="demo-full-width">  
+                            <mat-label>Month Paid</mat-label>
+                            <mat-select matNativeControl required formControlName="monthPaid">
+                              <mat-option *ngFor="let monat of monate" [value]="monat.value">
+                                {{monat.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>  
+                        <mat-error>  
+                          <span *ngIf="!accountForm.get('monthPaid').value && accountForm.get('monthPaid').touched"></span>  
+                        </mat-error>  
+                      </td>                                         
+                  </tr>                                      
+                  <tr>  
+                    <td></td>  
+                    <td  class="content-center">  
+                      <button type="submit" mat-raised-button color="accent"matTooltip="Click Submit Button"[disabled]="!accountForm.valid">Submit</button>      
+                      <button type="reset" mat-raised-button color="accent"matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>  
+                    </td>  
+                    <td>  
+                      <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">  
+                        {{massage}}  
+                      </p>  
+                    </td>  
+                  </tr>  
+                </table>  
+    <br><br>  
+          <table class="table" >  
+              <tr ngclass="btn-primary">  
+                <th class="tbl2">Payment Date</th>  
+                <th class="tbl2">Tenant Name</th>  
+                <th class="tbl2">Rent Amount Paid</th>  
+                <th class="tbl2">Electric Bill Paid</th>  
+                <th class="tbl2">Water Bill Paid</th>                   
+                <th class="tbl2">Month Paid</th>   
+                <th class="tbl2">Remarks</th>                        
+                <th class="tbl2">Edit</th>  
+                <th class="tbl2">Delete</th>  
+              </tr>  
+              <tr *ngFor="let account of accounts">  
+                <td class="tbl2">{{account.paymentDate | date: 'yyyy/MM/dd'}}</td>  
+                <td class="tbl2">{{account.tenantName}}</td> 
+                <td class="tbl2">{{account.rentAmountPaid}}</td> 
+                <td class="tbl2">{{account.electricBillPaid}}</td>  
+                <td class="tbl2">{{account.waterBillPaid}}</td>                 
+                <td class="tbl2">{{account.monthPaid}}</td>   
+                <td class="tbl2">{{account.remarks}}</td>    
+                <td class="tbl2">  
+                  <button type="button" class="btn btn-info"matTooltip="Click Edit Button"(click)="loadAccountToEdit(account.id)">Edit</button>  
+                </td>  
+                <td class="tbl2">  
+                  <button type="button" class="btn btn-danger"matTooltip="Click Delete Button"(click)="deleteAccount(account.id)">Delete</button>  
+                </td>  
+              </tr>        
+            </table>           
+        </form>  
+      </mat-card-content>  
+    </mat-card>  
+    </div>

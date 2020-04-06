@@ -1,8 +1,8 @@
 export class Customer {
-    id: number; 
+    id: string; 
     customerName: string;  
     customerAddress: string;
-    totalPrice: number;
+    totalPrice: string;
     brokerName: string;
     brokerAddress: string;
     contractStartDate: Date;

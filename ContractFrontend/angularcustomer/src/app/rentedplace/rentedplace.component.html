@@ -1,0 +1,66 @@
+<div class="container">  
+  
+    <mat-card>  
+      <mat-toolbar color="accent">  
+        <div align="center" style="color:white;text-align: right;">  
+          Places to choose from 
+        </div>    
+      </mat-toolbar>  
+    <br><br>  
+      <mat-card-content>  
+        <form *ngIf="rentedplaceForm" [formGroup]="rentedplaceForm" (ngSubmit)="onFormSubmit()">  
+                <table>  
+                  <tr>  
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input formControlName="rentedName" matTooltip="Enter Rented Place Name" matInput placeholder="Rented Name" autocomplete="rentedName">  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!rentedplaceForm.get('rentedName').value && rentedplaceForm.get('rentedName').touched"></span>  
+                      </mat-error>  
+                    </td>  
+                    <td class="tbl1">  
+                      <mat-form-field class="demo-full-width">  
+                        <input formControlName="address" matTooltip="Enter Rented Place Address" matInput placeholder="Rented Place Address" autocomplete="address">  
+                      </mat-form-field>  
+                      <mat-error>  
+                        <span *ngIf="!rentedplaceForm.get('address').value && rentedplaceForm.get('address').touched"></span>  
+                      </mat-error>  
+                    </td>                                                     
+                  </tr>                    
+                  <tr>  
+                    <td></td>  
+                    <td  class="content-center">  
+                      <button type="submit" mat-raised-button color="accent"matTooltip="Click Submit Button"[disabled]="!rentedplaceForm.valid">Submit</button>      
+                      <button type="reset" mat-raised-button color="accent"matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>  
+                    </td>  
+                    <td>  
+                      <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">  
+                        {{massage}}  
+                      </p>  
+                    </td>  
+                  </tr>  
+                </table>  
+    <br><br>  
+          <table class="table" >  
+              <tr ngclass="btn-primary">  
+                <th class="tbl2">Rented Place Name</th>  
+                <th class="tbl2">Rented PlaceAddress</th>                
+                <th class="tbl2">Edit</th>  
+                <th class="tbl2">Delete</th>  
+              </tr>  
+              <tr *ngFor="let rentedPlace of rentedPlaces">  
+                <td class="tbl2">{{rentedPlace.rentedName}}</td>  
+                <td class="tbl2">{{rentedPlace.address}}</td>           
+                <td class="tbl2">  
+                  <button type="button" class="btn btn-info"matTooltip="Click Edit Button"(click)="loadRentedPlaceToEdit(rentedPlace.id)">Edit</button>  
+                </td>  
+                <td class="tbl2">  
+                  <button type="button" class="btn btn-danger"matTooltip="Click Delete Button"(click)="deleteRentedPlace(rentedPlace.id)">Delete</button>  
+                </td>  
+              </tr>        
+            </table>           
+        </form>  
+      </mat-card-content>  
+    </mat-card>  
+    </div>

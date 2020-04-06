@@ -1,25 +1,123 @@
-<p>contract works!</p>
 <div class="container">  
- <div class="row" style="margin-top: 30px">
-    <table class="table">  
-        <tr>  
-          <th>Customer Name</th>  
-          <th>Customer Address</th>  
-          <th>Total Price</th>  
-          <th>Broker Name</th>  
-          <th>Broker Address</th>  
-          <th>Start Date</th>  
-          <th>End Date</th>                 
-        </tr>  
-        <tr *ngFor="let customer of customers">  
-          <td>{{customer.customerName}}</td>  
-          <td>{{customer.customerAddress}}</td>  
-          <td>{{customer.totalPrice}}</td>  
-          <td>{{customer.brokerName}}</td>  
-          <td>{{customer.brokerAddress}}</td>  
-          <td>{{customer.contractStartDate | date: 'dd/MM/yyyy'}}</td> 
-          <td>{{customer.contractEndDate | date: 'dd/MM/yyyy'}}</td>                    
-        </tr>        
-      </table> 
-  </div> 
-</div>
+  
+  <mat-card>  
+    <mat-toolbar color="accent">  
+      <div align="center" style="color:white;text-align: right;">  
+        Customer Contracts
+      </div>    
+    </mat-toolbar>  
+  <br><br>  
+    <mat-card-content>  
+      <form *ngIf="customerForm" [formGroup]="customerForm" (ngSubmit)="onFormSubmit()">  
+              <table>  
+                <tr>  
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input formControlName="customerName" matTooltip="Enter Customer Name" matInput placeholder="Customer Name" autocomplete="customerName">  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!customerForm.get('customerName').value && customerForm.get('customerName').touched"></span>  
+                    </mat-error>  
+                  </td>  
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input formControlName="customerAddress" matTooltip="Enter Customer Address" matInput placeholder="Customer Address" autocomplete="customerAddress">  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!customerForm.get('customerAddress').value && customerForm.get('customerAddress').touched"></span>  
+                    </mat-error>  
+                  </td> 
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input formControlName="totalPrice" matTooltip="Enter Total Price" matInput placeholder="Total Price" autocomplete="totalPrice">  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!customerForm.get('totalPrice').value && customerForm.get('totalPrice').touched"></span>  
+                    </mat-error>  
+                  </td>                                    
+                </tr>  
+                <tr>  
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input formControlName="brokerName" matTooltip="Enter Broker Name" matInput placeholder="Broker Name" autocomplete="brokerName">  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!customerForm.get('brokerName').value && customerForm.get('brokerName').touched"></span>  
+                    </mat-error>  
+                  </td> 
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input formControlName="brokerAddress" matTooltip="Enter Broker Address" matInput placeholder="Broker Address" autocomplete="brokerAddress">  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!customerForm.get('brokerAddress').value && customerForm.get('brokerAddress').touched"></span>  
+                    </mat-error>  
+                  </td>                   
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input matInput (dateChange)="change($event)" [matDatepicker]="picker"matTooltip="Enter Contract Start Date" formControlName="contractStartDate"placeholder="Choose Contract Start Date" autocomplete="contractStartDate">  
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>  
+                      <mat-datepicker #picker></mat-datepicker>  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!customerForm.get('contractStartDate').value && customerForm.get('contractStartDate').touched"></span>  
+                    </mat-error>  
+                  </td>  
+                  <td class="tbl1">  
+                    <mat-form-field class="demo-full-width">  
+                      <input matInput (dateChange)="change($event)" [matDatepicker]="pickerTo"matTooltip="Enter Contract End Date" formControlName="contractEndDate"placeholder="Choose Contract End Date" autocomplete="contractEndDate">  
+                      <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>  
+                      <mat-datepicker #pickerTo></mat-datepicker>  
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!customerForm.get('contractEndDate').value && customerForm.get('contractEndDate').touched"></span>  
+                    </mat-error>  
+                  </td>   
+                </tr>  
+                <tr>  
+                  <td></td>  
+                  <td  class="content-center">  
+                    <button type="submit" mat-raised-button color="accent"matTooltip="Click Submit Button"[disabled]="!customerForm.valid">Submit</button>      
+                    <button type="reset" mat-raised-button color="accent"matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>  
+                  </td>  
+                  <td>  
+                    <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">  
+                      {{massage}}  
+                    </p>  
+                  </td>  
+                </tr>  
+              </table>  
+  <br><br>  
+        <table class="table" >  
+            <tr ngclass="btn-primary">  
+              <th class="tbl2">Customer Name</th>  
+              <th class="tbl2">Customer Address</th>  
+              <th class="tbl2">Total Price</th>  
+              <th class="tbl2">Broker Name</th>  
+              <th class="tbl2">Broker Address</th>  
+              <th class="tbl2">Contract StartDate</th>  
+              <th class="tbl2">Contract EndDate</th>  
+              <th class="tbl2">Edit</th>  
+              <th class="tbl2">Delete</th>  
+            </tr>  
+            <tr *ngFor="let customer of customers">  
+              <td class="tbl2">{{customer.customerName}}</td>  
+              <td class="tbl2">{{customer.customerAddress}}</td>  
+              <td class="tbl2">{{customer.totalPrice}}</td>  
+              <td class="tbl2">{{customer.brokerName}}</td>  
+              <td class="tbl2">{{customer.brokerAddress}}</td>  
+              <td class="tbl2">{{customer.contractStartDate | date: 'yyyy/MM/dd'}}</td> 
+              <td class="tbl2">{{customer.contractEndDate | date: 'yyyy/MM/dd'}}</td> 
+              <td class="tbl2">  
+                <button type="button" class="btn btn-info"matTooltip="Click Edit Button"(click)="loadCustomerToEdit(customer.id)">Edit</button>  
+              </td>  
+              <td class="tbl2">  
+                <button type="button" class="btn btn-danger"matTooltip="Click Delete Button"(click)="deleteCustomer(customer.id)">Delete</button>  
+              </td>  
+            </tr>  
+    
+          </table>  
+      </form>  
+    </mat-card-content>  
+  </mat-card>  
+  </div>  

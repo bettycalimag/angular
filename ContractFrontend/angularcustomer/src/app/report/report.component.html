@@ -1,0 +1,41 @@
+<div class="container">  
+  
+    <mat-card>  
+      <mat-toolbar color="accent">  
+        <div align="center" style="color:white;text-align: right;">  
+          Please choose the month to generate 
+        </div>    
+      </mat-toolbar>  
+    <br><br>  
+      <mat-card-content>  
+        <form *ngIf="reportForm" [formGroup]="reportForm" (ngSubmit)="onFormSubmit()">  
+                <table>  
+                  <tr>  
+                    <mat-form-field class="demo-full-width">  
+                        <mat-label>Month to generate</mat-label>                        
+                          <mat-select matNativeControl required formControlName="monthId" placeholder="monate" [(ngModel)]="selected2" (change)="changeClient2($event.value)">
+                          <mat-option *ngFor="let monat of monate" [value]="monat.value">
+                            {{monat.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>  
+                    <mat-error>  
+                      <span *ngIf="!reportForm.get('monthId').value && reportForm.get('monthId').touched"></span>  
+                    </mat-error>                                                                       
+                  </tr>                    
+                  <tr>                     
+                    <td  class="content-center">  
+                      <button type="submit" mat-raised-button color="accent"matTooltip="Click Submit Button"[disabled]="!reportForm.valid">Submit</button>      
+                      <button type="reset" mat-raised-button color="accent"matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>  
+                    </td>  
+                    <td>  
+                      <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">  
+                        {{massage}}  
+                      </p>  
+                    </td>  
+                  </tr>  
+                </table>               
+        </form>  
+      </mat-card-content>  
+    </mat-card>  
+    </div>
