@@ -38,7 +38,8 @@ namespace Contracts.DTO
                 MonthPaid = entity.MonthPaid,              
                 PaymentDate = Utility.ConvertToUTC(entity.PaymentDate),
                 TenantId = entity.Tenant.Id,
-                TenantName = entity.Tenant.FirstName              
+                TenantName = entity.Tenant.FirstName  
+                //comment betty;
             };
         }
 

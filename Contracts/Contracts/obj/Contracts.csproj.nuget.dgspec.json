@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\USER\\source\\repos\\angular\\Contracts\\Contracts\\Contracts.csproj": {}
+    "C:\\Users\\7240\\source\\test\\Contracts\\Contracts\\Contracts.csproj": {}
   },
   "projects": {
-    "C:\\Users\\USER\\source\\repos\\angular\\Contracts\\Contracts\\Contracts.csproj": {
+    "C:\\Users\\7240\\source\\test\\Contracts\\Contracts\\Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\source\\repos\\angular\\Contracts\\Contracts\\Contracts.csproj",
+        "projectUniqueName": "C:\\Users\\7240\\source\\test\\Contracts\\Contracts\\Contracts.csproj",
         "projectName": "Contracts",
-        "projectPath": "C:\\Users\\USER\\source\\repos\\angular\\Contracts\\Contracts\\Contracts.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\source\\repos\\angular\\Contracts\\Contracts\\obj\\",
+        "projectPath": "C:\\Users\\7240\\source\\test\\Contracts\\Contracts\\Contracts.csproj",
+        "packagesPath": "C:\\Users\\7240\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\7240\\source\\test\\Contracts\\Contracts\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\7240\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -25,10 +22,12 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://packagesource": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -40,6 +39,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "DotNetZip": {
               "target": "Package",
@@ -84,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
