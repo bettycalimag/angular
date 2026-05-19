@@ -10,7 +10,7 @@
             "name": "Launch Program",
             "program": "${workspaceFolder}\\angularcustomer\\src\\app\\customer\\customer.component.ts",
             "outFiles": [
-                "${workspaceFolder}/**/*.js"  mula sa master
+                "${workspaceFolder}/**/*.js"  mula sa dev papuntang test and master
             ]
         }
     ]
